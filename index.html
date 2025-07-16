@@ -3,6 +3,7 @@
     <meta charset="UTF-8" />
     <title>Mage Dynamics</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
     <style>
         @font-face {
             font-family: NHaas;
@@ -42,19 +43,25 @@
             align-content: center;
             text-align: center;
             gap: 0.25rem;
+            background-color: transparent;
             /*border: 1px dashed white;*/
+        }
+        svg,
+        .info-container>*{
+            background-color: transparent;
         }
         .info-container h1 {
             text-align: center;
-            font-size: clamp(2rem, 10vw, 4rem);
+            font-size: clamp(2rem, 15vw, 4rem);
             /*border: 1px dashed red;*/
             margin: 0;
         }
         .info-container h2 {
             text-align: center;
-            font-size: clamp(1rem, 5vw, 2rem);
+            font-size: clamp(1rem, 4vw, 2rem);
             /*border: 1px dashed green;*/
-            margin: 0;
+            margin-left: 0 auto;
+            width: fit-content;
         }
         .info-container p {
             text-align: center;
@@ -278,9 +285,25 @@
     </svg>
     </div>
     <div class="info-container">
-        <h1>Mage Dynamics</h1>
-        <h2>Engineering Reality</h2>
+        <h1 id="title">Mage Dynamics</h1>
+        <h2 id="subtitle">Engineering Reality</h2>
         <p>Coming to a Lagrange point near you.</p>
     </div>
 </body>
+    <script>
+        window.addEventListener('load', () => {
+            document.fonts.ready.then(() => {
+                const h1 = document.getElementById('title');
+                const h2 = document.getElementById('subtitle');
+
+                const h1Width = h1.offsetWidth;
+                const h2Width = h2.offsetWidth;
+                const letterCount = h2.textContent.length;
+                console.log(letterCount)
+                const spacing = (h1Width - h2Width) / letterCount;
+                console.log({h1Width, h2Width, spacing});
+                h2.style.letterSpacing = Math.max(spacing, 0) + 'px';
+            });
+        });
+    </script>
 </html>
